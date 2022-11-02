@@ -50,7 +50,7 @@ class RegisteredController extends Controller
         ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter')
         ->where('reg_periksa.kd_poli','like',"%".$cari."%")
         ->where('reg_periksa.tgl_registrasi',$today)
-        ->orderby('reg_periksa.no_rawat','desc')
+        ->orderby('reg_periksa.no_rawat','asc')
         ->get();
 
         return response()->json([
@@ -59,26 +59,7 @@ class RegisteredController extends Controller
             'data' => $get
         ],200);
     }
-    public function showpoli($kode)
-    {
-        $today = Carbon::today();
-
-        $get = Registered::join('pasien','reg_periksa.no_rkm_medis','=','pasien.no_rkm_medis')
-        ->join('poliklinik','reg_periksa.kd_poli','=','poliklinik.kd_poli')
-        ->join('dokter','reg_periksa.kd_dokter','=','dokter.kd_dokter')
-        // ->join('antripoli_custom','reg_periksa.no_rawat','=','antripoli_custom.no_rawat')
-        ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter')
-        ->where('reg_periksa.tgl_registrasi',$today)
-        ->where('reg_periksa.kd_poli',$kode)
-        ->orderby('reg_periksa.no_rawat','desc')
-        ->get();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Data Pasien',
-            'data' => $get
-        ],200);
-    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -149,33 +130,7 @@ class RegisteredController extends Controller
         AntrianPoliF::dispatch($request->all());   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($tgl, $norm, $dokter, $poli)
-    {
-        // $hapus = Antrian::where('tgl',$tgl)
-        // ->where('no_rkm_medis',$norm)
-        // ->where('kd_dokter',$dokter)
-        // ->where('kd_poli',$poli)
-        // ->delete();
-
-        // if ($hapus) {
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Berhasil Dihapus!',
-        //     ], 200);
-        // } else {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Gagal Dihapus!',
-        //     ], 400);
-        // }
-    }
-
+    
     public function Poliklinik()
     {
         $getPoli = Poli::get();
