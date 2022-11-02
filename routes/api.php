@@ -44,4 +44,10 @@ Route::post('/antrianc/update/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controller
 //Antrian D
 Route::post('/antrian/stored','App\Http\Controllers\RegisteredController@stored');
 Route::post('/antriand/update/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controllers\RegisteredController@updated');
+//Antrian E
+Route::post('/antrian/storee','App\Http\Controllers\RegisteredController@storee');
+Route::post('/antriane/update/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controllers\RegisteredController@updatee');
+//Antrian F
+Route::post('/antrian/storef','App\Http\Controllers\RegisteredController@storef');
+Route::post('/antrianf/update/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controllers\RegisteredController@updatef');
 

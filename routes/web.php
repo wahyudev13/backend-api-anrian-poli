@@ -1,5 +1,6 @@
 <?php
 use App\Events\AntrianPoliA;
+use App\Events\Train;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+  
 });
 
-// Route::get('/test-broadcast-event', function () {
-//     AntrianPoliA::dispatch('parameter atribut message | sangcahaya.id');
-    
-//     echo 'test broadcast event sangcahaya.id';
+
+// Route::get('/broadcast', function () {
+//    broadcast(new App\Events\Train());
 // });
+
+// Route::post('/antrian/store','App\Http\Controllers\RegisteredController@store');

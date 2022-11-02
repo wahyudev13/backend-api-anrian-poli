@@ -10,6 +10,8 @@ use App\Events\AntrianPoliA;
 use App\Events\AntrianPoliB;
 use App\Events\AntrianPoliC;
 use App\Events\AntrianPoliD;
+use App\Events\AntrianPoliE;
+use App\Events\AntrianPoliF;
 use Carbon\Carbon;
 
 class RegisteredController extends Controller
@@ -77,17 +79,6 @@ class RegisteredController extends Controller
             'data' => $get
         ],200);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -97,217 +88,32 @@ class RegisteredController extends Controller
     //Function Panggilan A
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'kd_dokter'     => 'required',
-            'kd_poli'   => 'required',
-            'status'   => 'required',
-            'no_rawat'   => 'required',
-            'no_reg' => 'required',
-            'no_rkm_medis' => 'required'
-         ]);
-
-         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-         }
-
-        $count = Antrian::where('no_rawat',$request->no_rawat)->where('status','1')->count();
-        if ($count > 0) {
-           alert('Pasien Sudah Pernah dipanggil, Klik Tombol STOP Dahulu');
-        }else {
-            $simpan = Antrian::insert([
-                'kd_dokter' => $request->kd_dokter,
-                'kd_poli' => $request->kd_poli,
-                'status' => $request->status,
-                'no_rawat' => $request->no_rawat,
-                'no_reg' => $request->no_reg,
-                'no_rkm_medis' => $request->no_rkm_medis,
-                'tgl' => $request->tgl_registrasi
-            ]);
-    
-            AntrianPoliA::dispatch($request->all());
-        }
-
-        
+        AntrianPoliA::dispatch($request->all());
     }
     //Function Panggilan B
     public function storeb(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'kd_dokter'     => 'required',
-            'kd_poli'   => 'required',
-            'status'   => 'required',
-            'no_rawat'   => 'required',
-            'no_reg' => 'required',
-            'no_rkm_medis' => 'required'
-         ]);
-
-         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-         }
-
-        $count = Antrian::where('no_rawat',$request->no_rawat)->where('status','1')->count();
-        if ($count > 0) {
-           alert('Pasien Sudah Pernah dipanggil, Klik Tombol STOP Dahulu');
-        }else {
-            $simpan = Antrian::insert([
-                'kd_dokter' => $request->kd_dokter,
-                'kd_poli' => $request->kd_poli,
-                'status' => $request->status,
-                'no_rawat' => $request->no_rawat,
-                'no_reg' => $request->no_reg,
-                'no_rkm_medis' => $request->no_rkm_medis,
-                'tgl' => $request->tgl_registrasi
-            ]);
-
-            AntrianPoliB::dispatch($request->all());
-
-            // return response()->json([
-            //             'success' => true,
-            //             'message' => 'Berhasil',
-            //             'data' => $simpan
-            //         ], 200);
-    
-            
-        }
-
-        
+        AntrianPoliB::dispatch($request->all());   
     }
     //Function Panggilan C
     public function storec(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'kd_dokter'     => 'required',
-            'kd_poli'   => 'required',
-            'status'   => 'required',
-            'no_rawat'   => 'required',
-            'no_reg' => 'required',
-            'no_rkm_medis' => 'required'
-         ]);
-
-         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-         }
-
-        $count = Antrian::where('no_rawat',$request->no_rawat)->where('status','1')->count();
-        if ($count > 0) {
-           alert('Pasien Sudah Pernah dipanggil, Klik Tombol STOP Dahulu');
-        }else {
-            $simpan = Antrian::insert([
-                'kd_dokter' => $request->kd_dokter,
-                'kd_poli' => $request->kd_poli,
-                'status' => $request->status,
-                'no_rawat' => $request->no_rawat,
-                'no_reg' => $request->no_reg,
-                'no_rkm_medis' => $request->no_rkm_medis,
-                'tgl' => $request->tgl_registrasi
-            ]);
-
-            AntrianPoliC::dispatch($request->all());
-
-            // return response()->json([
-            //             'success' => true,
-            //             'message' => 'Berhasil',
-            //             'data' => $simpan
-            //         ], 200);
-    
-            
-        }
-
-        
+        AntrianPoliC::dispatch($request->all());
     }
     //Function Panggilan D
     public function stored(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'kd_dokter'     => 'required',
-            'kd_poli'   => 'required',
-            'status'   => 'required',
-            'no_rawat'   => 'required',
-            'no_reg' => 'required',
-            'no_rkm_medis' => 'required'
-         ]);
-
-         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-         }
-
-        $count = Antrian::where('no_rawat',$request->no_rawat)->where('status','1')->count();
-        if ($count > 0) {
-           alert('Pasien Sudah Pernah dipanggil, Klik Tombol STOP Dahulu');
-        }else {
-            $simpan = Antrian::insert([
-                'kd_dokter' => $request->kd_dokter,
-                'kd_poli' => $request->kd_poli,
-                'status' => $request->status,
-                'no_rawat' => $request->no_rawat,
-                'no_reg' => $request->no_reg,
-                'no_rkm_medis' => $request->no_rkm_medis,
-                'tgl' => $request->tgl_registrasi
-            ]);
-
-            AntrianPoliD::dispatch($request->all());
-
-            // return response()->json([
-            //             'success' => true,
-            //             'message' => 'Berhasil',
-            //             'data' => $simpan
-            //         ], 200);
-    
-            
-        }
-
-        
+        AntrianPoliD::dispatch($request->all());
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id,$tglreg, $noreg)
+    //Function Panggilan E
+    public function storee(Request $request)
     {
-        // $panggil = Registered::where('no_rkm_medis',$id)
-        // ->where('tgl_registrasi',$tglreg)
-        // ->where('no_reg',$noreg)
-        // ->first();
-
-        // $panggil = Registered::join('pasien','reg_periksa.no_rkm_medis','=','pasien.no_rkm_medis')
-        // ->join('poliklinik','reg_periksa.kd_poli','=','poliklinik.kd_poli')
-        // ->select('reg_periksa.no_reg','pasien.nm_pasien','poliklinik.nm_poli')
-        // ->where('reg_periksa.no_rkm_medis',$id)
-        // ->where('reg_periksa.tgl_registrasi',$tglreg)
-        // ->where('reg_periksa.no_reg',$noreg)
-        // ->first();
-       
-
-        // if ($panggil) {
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Success!!!',
-        //         'data' => $panggil
-        //     ], 200);
-        // }else {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Error, Tidak Ditemukan',
-        //         'data' => ''
-        //     ], 200);
-        // }
-        
-
-        
+        AntrianPoliE::dispatch($request->all());
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    //Function Panggilan E
+    public function storef(Request $request)
     {
-        //
+        AntrianPoliF::dispatch($request->all());
     }
 
     /**
@@ -319,136 +125,28 @@ class RegisteredController extends Controller
      */
     public function update(Request $request, $tgl, $norm, $dokter, $poli)
     {
-        $validator = Validator::make($request->all(), [
-            'status'   => 'required',
-         ]);
-
-         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-         }
-
-        $update = Antrian::where('tgl',$tgl)
-        ->where('no_rkm_medis',$norm)
-        ->where('kd_dokter',$dokter)
-        ->where('kd_poli',$poli)
-        ->update([
-            'status' => $request->status
-        ]);
-
-        if ($update) {
-            AntrianPoliA::dispatch($request->all());
-            return response()->json([
-                'success' => true,
-                'message' => 'Berhasil DiUpdate!',
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal DiUpdate!',
-            ], 400);
-        }
-
-        
+        AntrianPoliA::dispatch($request->all());   
     }
     public function updateb(Request $request, $tgl, $norm, $dokter, $poli)
     {
-        $validator = Validator::make($request->all(), [
-            'status'   => 'required',
-        ]);
-
-        if ($validator->fails()) {
-        return response()->json($validator->errors(), 422);
-        }
-
-        $update = Antrian::where('tgl',$tgl)
-        ->where('no_rkm_medis',$norm)
-        ->where('kd_dokter',$dokter)
-        ->where('kd_poli',$poli)
-        ->update([
-            'status' => $request->status
-        ]);
-
-        if ($update) {
-            AntrianPoliB::dispatch($request->all());
-            return response()->json([
-                'success' => true,
-                'message' => 'Berhasil DiUpdate!',
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal DiUpdate!',
-            ], 400);
-        }
-
-        
+        AntrianPoliB::dispatch($request->all());
     }
 
     public function updatec(Request $request, $tgl, $norm, $dokter, $poli)
     {
-        $validator = Validator::make($request->all(), [
-            'status'   => 'required',
-        ]);
-
-        if ($validator->fails()) {
-        return response()->json($validator->errors(), 422);
-        }
-
-        $update = Antrian::where('tgl',$tgl)
-        ->where('no_rkm_medis',$norm)
-        ->where('kd_dokter',$dokter)
-        ->where('kd_poli',$poli)
-        ->update([
-            'status' => $request->status
-        ]);
-
-        if ($update) {
-            AntrianPoliC::dispatch($request->all());
-            return response()->json([
-                'success' => true,
-                'message' => 'Berhasil DiUpdate!',
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal DiUpdate!',
-            ], 400);
-        }
-
-        
+        AntrianPoliC::dispatch($request->all());   
     }
     public function updated(Request $request, $tgl, $norm, $dokter, $poli)
     {
-        $validator = Validator::make($request->all(), [
-            'status'   => 'required',
-        ]);
-
-        if ($validator->fails()) {
-        return response()->json($validator->errors(), 422);
-        }
-
-        $update = Antrian::where('tgl',$tgl)
-        ->where('no_rkm_medis',$norm)
-        ->where('kd_dokter',$dokter)
-        ->where('kd_poli',$poli)
-        ->update([
-            'status' => $request->status
-        ]);
-
-        if ($update) {
-            AntrianPoliD::dispatch($request->all());
-            return response()->json([
-                'success' => true,
-                'message' => 'Berhasil DiUpdate!',
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal DiUpdate!',
-            ], 400);
-        }
-
-        
+        AntrianPoliD::dispatch($request->all());   
+    }
+    public function updatee(Request $request, $tgl, $norm, $dokter, $poli)
+    {
+        AntrianPoliE::dispatch($request->all());   
+    }
+    public function updatef(Request $request, $tgl, $norm, $dokter, $poli)
+    {
+        AntrianPoliF::dispatch($request->all());   
     }
 
     /**
