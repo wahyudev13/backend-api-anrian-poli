@@ -50,7 +50,7 @@ class RegisteredController extends Controller
         ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter')
         ->where('reg_periksa.kd_poli','like',"%".$cari."%")
         ->where('reg_periksa.tgl_registrasi',$today)
-        ->orderby('reg_periksa.no_rawat','asc')
+        ->orderby('reg_periksa.no_reg','asc')
         ->get();
 
         return response()->json([
