@@ -20,8 +20,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/broadcast', function () {
-   broadcast(new App\Events\Train());
-});
+// Route::get('/broadcast', function () {
+//    broadcast(new App\Events\Train());
+// });
 
 // Route::post('/antrian/store','App\Http\Controllers\RegisteredController@store');
