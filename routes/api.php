@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,6 @@ Route::get('/getpoli','App\Http\Controllers\RegisteredController@Poliklinik');
 Route::get('/poli/{kode}','App\Http\Controllers\RegisteredController@showpoli');
 //Route::resource('/getregistered',RegisteredController::class);
 //Antrian A
-//Route::get('/panggil/{id}/{tglreg}/{noreg}','App\Http\Controllers\RegisteredController@show');
 Route::post('/antrian/store','App\Http\Controllers\RegisteredController@store');
 Route::post('/antrian/update/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controllers\RegisteredController@update');
 //Route::get('/antrian/hapus/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controllers\RegisteredController@destroy');
@@ -50,4 +50,12 @@ Route::post('/antriane/update/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controller
 //Antrian F
 Route::post('/antrian/storef','App\Http\Controllers\RegisteredController@storef');
 Route::post('/antrianf/update/{tgl}/{norm}/{dokter}/{poli}','App\Http\Controllers\RegisteredController@updatef');
+
+//ANTRIAN LOKET
+Route::get('loket/get', [LoketController::class, 'get'])->name('loket.get');
+Route::post('loket/panggil/{kd}', [LoketController::class, 'panggil'])->name('loket.panggil');
+Route::post('loket/stop/{kd}', [LoketController::class, 'stop'])->name('loket.stop');
+Route::post('loket/lewati/{kd}', [LoketController::class, 'lewati'])->name('loket.lewati');
+Route::post('loket/selesai/{kd}', [LoketController::class, 'selesai'])->name('loket.selesai');
+
 
