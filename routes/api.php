@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoketController;
+use App\Http\Controllers\LoketControllerManual;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +58,9 @@ Route::post('loket/panggil/{kd}', [LoketController::class, 'panggil'])->name('lo
 Route::post('loket/stop/{kd}', [LoketController::class, 'stop'])->name('loket.stop');
 Route::post('loket/lewati/{kd}', [LoketController::class, 'lewati'])->name('loket.lewati');
 Route::post('loket/selesai/{kd}', [LoketController::class, 'selesai'])->name('loket.selesai');
+
+//MANUAL
+Route::post('loket/m2/panggil/{nomor}', [LoketControllerManual::class, 'panggil'])->name('loket.manual.panggil');
+
 
 
