@@ -62,6 +62,7 @@ Route::post('loket/selesai/{kd}', [LoketController::class, 'selesai'])->name('lo
 
 //MANUAL
 Route::post('loket/m2/panggil/{nomor}', [LoketControllerManual::class, 'panggil'])->name('loket.manual.panggil');
+Route::post('loket/m2/stop/{nomor}', [LoketControllerManual::class, 'stop'])->name('loket.manual.stop');
 
 //Farmasi
 Route::get('farmasi/nomor/nomor-a/get', [FarmasiController::class, 'getNomorA'])->name('farmasi.nomora.get');
