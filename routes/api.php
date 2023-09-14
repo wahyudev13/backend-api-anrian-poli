@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoketController;
 use App\Http\Controllers\LoketControllerManual;
+use App\Http\Controllers\FarmasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,20 @@ Route::post('loket/selesai/{kd}', [LoketController::class, 'selesai'])->name('lo
 
 //MANUAL
 Route::post('loket/m2/panggil/{nomor}', [LoketControllerManual::class, 'panggil'])->name('loket.manual.panggil');
+
+//Farmasi
+Route::get('farmasi/nomor/nomor-a/get', [FarmasiController::class, 'getNomorA'])->name('farmasi.nomora.get');
+Route::get('farmasi/nomor/antrian-a/get', [FarmasiController::class, 'getAntrianA'])->name('farmasi.antriana.get');
+Route::post('farmasi/nomor/antrian-a/tambah', [FarmasiController::class, 'tambahA'])->name('farmasi.antriana.store');
+Route::post('farmasi/nomor/antrian-a/panggil/{id}', [FarmasiController::class, 'panggilA'])->name('farmasi.antriana.panggil');
+Route::post('farmasi/nomor/antrian-a/stop/{id}', [FarmasiController::class, 'stopA'])->name('farmasi.antriana.stop');
+Route::post('farmasi/nomor/antrian-a/lewati/{id}', [FarmasiController::class, 'lewati'])->name('farmasi.antriana.lewati');
+Route::post('farmasi/nomor/antrian-a/selesai/{id}', [FarmasiController::class, 'selesai'])->name('farmasi.antriana.selesai');
+
+//ANtrian B
+Route::get('farmasi/nomor/nomor-b/get', [FarmasiController::class, 'getNomorB'])->name('farmasi.nomorb.get');
+Route::get('farmasi/nomor/antrian-b/get', [FarmasiController::class, 'getAntrianB'])->name('farmasi.antrianb.get');
+Route::post('farmasi/nomor/antrian-b/tambah', [FarmasiController::class, 'tambahB'])->name('farmasi.antrianb.store');
 
 
 
