@@ -17,7 +17,7 @@ class FarmasiController extends Controller
      */
     public function index()
     {
-        //tes commit
+        //
     }
 
     public function getNomorA() {
