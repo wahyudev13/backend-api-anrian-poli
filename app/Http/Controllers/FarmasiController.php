@@ -167,7 +167,7 @@ class FarmasiController extends Controller
         $cek_status = Farmasi::where('ketegori',$kategori->ketegori)
         ->where('id', $id)->where('post_date', $todayDate)->first();
 
-        if ($cek_status->status == 0 || $cek_status->status == 2 || $cek_status->status == 3) {
+        if ($cek_status->status == 0 || $cek_status->status == 2 || $cek_status->status == 3 || $cek_status->status == 5) {
             return response()->json([
                 'message'   => 'error',
                 'data'      => 'ANTRIAN '.$cek_status->no_urut.' BELUM TERPANGGIL'
@@ -227,6 +227,36 @@ class FarmasiController extends Controller
             'message'   => 'success',
             'data'      => $selesai
         ], 200);   
+    }
+
+    public function proses($id) {
+        $todayDate = Carbon::now()->format('Y-m-d');
+        $cari_proses = Farmasi::where('id', $id)->where('status',5)->where('post_date', $todayDate)->count();
+        $cek_status = Farmasi::where('id', $id)->where('post_date', $todayDate)->first();
+        if ($cari_proses > 0) {
+            return response()->json([
+                'message'   => 'error',
+                'data'      => 'ANTRIAN '.$cek_status->no_urut.' SUDAH DIPROSES'
+            ], 400);
+        }else {
+            $proses = Farmasi::where('id', $id)->where('post_date', $todayDate)->update([
+                'status' => 5,
+            ]);
+        }
+
+        return response()->json([
+            'message'   => 'success',
+            'data'      => $proses
+        ], 200);   
+    }
+
+    public function getProses() {
+        $todayDate = Carbon::now()->format('Y-m-d');
+        $cari_proses = Farmasi::where('status',5)->where('post_date', $todayDate)->orderBy('updated_at', 'ASC')->get();
+        return response()->json([
+            'message'   => 'success',
+            'data'      => $cari_proses
+        ], 200);
     }
 
     /**

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoketController;
 use App\Http\Controllers\LoketControllerManual;
 use App\Http\Controllers\FarmasiController;
+use App\Http\Controllers\TesAntrianController;
 
 //23-11-2024
 use App\Http\Controllers\LoketDobleController;
@@ -81,7 +82,9 @@ Route::post('farmasi/nomor/antrian-a/panggil/{id}', [FarmasiController::class, '
 Route::post('farmasi/nomor/antrian-a/stop/{id}', [FarmasiController::class, 'stopA'])->name('farmasi.antriana.stop');
 Route::post('farmasi/nomor/antrian-a/lewati/{id}', [FarmasiController::class, 'lewati'])->name('farmasi.antriana.lewati');
 Route::post('farmasi/nomor/antrian-a/selesai/{id}', [FarmasiController::class, 'selesai'])->name('farmasi.antriana.selesai');
-
+//23-11-2014
+Route::post('farmasi/nomor/antrian/proses/{id}', [FarmasiController::class, 'proses'])->name('farmasi.antriana.proses');
+Route::get('farmasi/nomor/antrian/proses/get', [FarmasiController::class, 'getProses'])->name('farmasi.antriana.proses.get');
 
 //23-11-2014
 //ANTRIAN LOKET DOBEL LOKET 1
@@ -92,5 +95,11 @@ Route::post('loket/dobel-2/panggil', [LoketDobleController::class, 'panggil2'])-
 Route::get('loket/text_marquee', [LoketDobleController::class, 'text_marquee'])->name('loket.text_marquee');
 //ENABLE RESPONSIVE VOICE
 Route::get('loket/responsive-voice', [LoketDobleController::class, 'responsive_voice'])->name('loket.responsive_voice');
+
+
+//TES ANTRIAN
+Route::post('antrian/tes/1', [TesAntrianController::class, 'index'])->name('tes.antrian.index');
+Route::post('antrian/tes/loket', [TesAntrianController::class, 'loket'])->name('tes.antrian.loket');
+
 
 

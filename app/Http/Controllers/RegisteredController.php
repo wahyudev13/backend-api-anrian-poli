@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Registered;
 use App\Models\Antrian;
 use App\Models\Poli;
+use App\Models\AntrianPoliPKU;
 use App\Events\AntrianPoliA;
 use App\Events\AntrianPoliB;
 use App\Events\AntrianPoliC;
@@ -28,7 +30,8 @@ class RegisteredController extends Controller
         $get = Registered::join('pasien','reg_periksa.no_rkm_medis','=','pasien.no_rkm_medis')
         ->join('poliklinik','reg_periksa.kd_poli','=','poliklinik.kd_poli')
         ->join('dokter','reg_periksa.kd_dokter','=','dokter.kd_dokter')
-        ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter')
+        ->join('penjab','reg_periksa.kd_pj','=','penjab.kd_pj')
+        ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','reg_periksa.stts','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter','penjab.png_jawab')
         ->where('reg_periksa.tgl_registrasi',$today)
         ->orderby('reg_periksa.no_rawat','desc')
         ->get();
@@ -47,7 +50,8 @@ class RegisteredController extends Controller
         $get = Registered::join('pasien','reg_periksa.no_rkm_medis','=','pasien.no_rkm_medis')
         ->join('poliklinik','reg_periksa.kd_poli','=','poliklinik.kd_poli')
         ->join('dokter','reg_periksa.kd_dokter','=','dokter.kd_dokter')
-        ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter')
+        ->join('penjab','reg_periksa.kd_pj','=','penjab.kd_pj')
+        ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','reg_periksa.stts','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter','penjab.png_jawab')
         ->where('reg_periksa.kd_poli','like',"%".$cari."%")
         ->where('reg_periksa.tgl_registrasi',$today)
         ->orderby('reg_periksa.no_reg','asc')
@@ -69,32 +73,70 @@ class RegisteredController extends Controller
     //Function Panggilan A
     public function store(Request $request)
     {
-        AntrianPoliA::dispatch($request->all());
+        $simpan = AntrianPoliPKU::updateOrCreate(
+            ['no_rawat' => $request->no_rawat], 
+            ['waktu' => now()]
+        );        
+
+        if ($simpan) {
+            AntrianPoliA::dispatch($request->all());
+        }
     }
     //Function Panggilan B
     public function storeb(Request $request)
     {
-        AntrianPoliB::dispatch($request->all());   
+        $simpan = AntrianPoliPKU::updateOrCreate(
+            ['no_rawat' => $request->no_rawat], 
+            ['waktu' => now()]
+        );        
+
+        if ($simpan) {
+            AntrianPoliB::dispatch($request->all());
+        }
     }
     //Function Panggilan C
     public function storec(Request $request)
     {
-        AntrianPoliC::dispatch($request->all());
+        $simpan = AntrianPoliPKU::updateOrCreate(
+            ['no_rawat' => $request->no_rawat], 
+            ['waktu' => now()]
+        );
+        if ($simpan) {   
+            AntrianPoliC::dispatch($request->all());
+        }
     }
     //Function Panggilan D
     public function stored(Request $request)
     {
-        AntrianPoliD::dispatch($request->all());
+        $simpan = AntrianPoliPKU::updateOrCreate(
+            ['no_rawat' => $request->no_rawat], 
+            ['waktu' => now()]
+        );
+        if ($simpan) {   
+            AntrianPoliD::dispatch($request->all());
+        }
     }
     //Function Panggilan E
     public function storee(Request $request)
     {
-        AntrianPoliE::dispatch($request->all());
+        $simpan = AntrianPoliPKU::updateOrCreate(
+            ['no_rawat' => $request->no_rawat], 
+            ['waktu' => now()]
+        );
+        if ($simpan) {   
+            AntrianPoliE::dispatch($request->all());
+        }
     }
     //Function Panggilan E
     public function storef(Request $request)
     {
-        AntrianPoliF::dispatch($request->all());
+        $simpan = AntrianPoliPKU::updateOrCreate(
+            ['no_rawat' => $request->no_rawat], 
+            ['waktu' => now()]
+        );
+        if ($simpan) {
+            AntrianPoliF::dispatch($request->all());
+        }
     }
 
     /**
@@ -133,7 +175,8 @@ class RegisteredController extends Controller
     
     public function Poliklinik()
     {
-        $getPoli = Poli::get();
+        $kode_poli = explode(',', env('POLI_DIGUNAKAN'));
+        $getPoli = Poli::whereIn('kd_poli', $kode_poli)->distinct()->get();
 
         return response()->json([
             'success' => true,
