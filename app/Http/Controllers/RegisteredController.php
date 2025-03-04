@@ -73,70 +73,76 @@ class RegisteredController extends Controller
     //Function Panggilan A
     public function store(Request $request)
     {
-        $simpan = AntrianPoliPKU::updateOrCreate(
-            ['no_rawat' => $request->no_rawat], 
-            ['waktu' => now()]
-        );        
+        // $simpan = AntrianPoliPKU::updateOrCreate(
+        //     ['no_rawat' => $request->no_rawat], 
+        //     ['waktu' => now()]
+        // );        
 
-        if ($simpan) {
-            AntrianPoliA::dispatch($request->all());
-        }
+        // if ($simpan) {
+        //     AntrianPoliA::dispatch($request->all());
+        // }
+        AntrianPoliA::dispatch($request->all());
     }
     //Function Panggilan B
     public function storeb(Request $request)
     {
-        $simpan = AntrianPoliPKU::updateOrCreate(
-            ['no_rawat' => $request->no_rawat], 
-            ['waktu' => now()]
-        );        
+        // $simpan = AntrianPoliPKU::updateOrCreate(
+        //     ['no_rawat' => $request->no_rawat], 
+        //     ['waktu' => now()]
+        // );        
 
-        if ($simpan) {
-            AntrianPoliB::dispatch($request->all());
-        }
+        // if ($simpan) {
+        //     AntrianPoliB::dispatch($request->all());
+        // }
+        AntrianPoliB::dispatch($request->all());
     }
     //Function Panggilan C
     public function storec(Request $request)
     {
-        $simpan = AntrianPoliPKU::updateOrCreate(
-            ['no_rawat' => $request->no_rawat], 
-            ['waktu' => now()]
-        );
-        if ($simpan) {   
-            AntrianPoliC::dispatch($request->all());
-        }
+        // $simpan = AntrianPoliPKU::updateOrCreate(
+        //     ['no_rawat' => $request->no_rawat], 
+        //     ['waktu' => now()]
+        // );
+        // if ($simpan) {   
+        //     AntrianPoliC::dispatch($request->all());
+        // }
+        AntrianPoliC::dispatch($request->all());
     }
     //Function Panggilan D
     public function stored(Request $request)
     {
-        $simpan = AntrianPoliPKU::updateOrCreate(
-            ['no_rawat' => $request->no_rawat], 
-            ['waktu' => now()]
-        );
-        if ($simpan) {   
-            AntrianPoliD::dispatch($request->all());
-        }
+        // $simpan = AntrianPoliPKU::updateOrCreate(
+        //     ['no_rawat' => $request->no_rawat], 
+        //     ['waktu' => now()]
+        // );
+        // if ($simpan) {   
+        //     AntrianPoliD::dispatch($request->all());
+        // }
+        AntrianPoliD::dispatch($request->all());
     }
     //Function Panggilan E
     public function storee(Request $request)
     {
-        $simpan = AntrianPoliPKU::updateOrCreate(
-            ['no_rawat' => $request->no_rawat], 
-            ['waktu' => now()]
-        );
-        if ($simpan) {   
-            AntrianPoliE::dispatch($request->all());
-        }
+        // $simpan = AntrianPoliPKU::updateOrCreate(
+        //     ['no_rawat' => $request->no_rawat], 
+        //     ['waktu' => now()]
+        // );
+        // if ($simpan) {   
+        //     AntrianPoliE::dispatch($request->all());
+        // }
+        AntrianPoliE::dispatch($request->all());
     }
     //Function Panggilan E
     public function storef(Request $request)
     {
-        $simpan = AntrianPoliPKU::updateOrCreate(
-            ['no_rawat' => $request->no_rawat], 
-            ['waktu' => now()]
-        );
-        if ($simpan) {
-            AntrianPoliF::dispatch($request->all());
-        }
+        // $simpan = AntrianPoliPKU::updateOrCreate(
+        //     ['no_rawat' => $request->no_rawat], 
+        //     ['waktu' => now()]
+        // );
+        // if ($simpan) {
+        //     AntrianPoliF::dispatch($request->all());
+        // }
+        AntrianPoliF::dispatch($request->all());
     }
 
     /**
