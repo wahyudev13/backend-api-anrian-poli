@@ -98,7 +98,8 @@ Route::get('loket/responsive-voice', [LoketDobleController::class, 'responsive_v
 
 
 //TES ANTRIAN
-Route::post('antrian/tes/1', [TesAntrianController::class, 'index'])->name('tes.antrian.index');
+Route::post('antrian/tes/1', [TesAntrianController::class, 'display1'])->name('tes.antrian.display1');
+Route::post('antrian/tes/2', [TesAntrianController::class, 'display2'])->name('tes.antrian.display2');
 Route::post('antrian/tes/loket', [TesAntrianController::class, 'loket'])->name('tes.antrian.loket');
 
 
