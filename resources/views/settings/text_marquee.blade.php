@@ -56,7 +56,7 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h4 m-0">Pengaturan Text Marquee Loket</h1>
-            <a href="{{ url('/') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
+            <a href="{{ route('menu.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
         </div>
 
         <div class="row justify-content-center">

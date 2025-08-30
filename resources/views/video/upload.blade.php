@@ -12,7 +12,7 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h4 m-0">Pengaturan Display Video</h1>
-            <a href="/" class="btn btn-outline-secondary btn-sm">Kembali</a>
+            <a href="{{ route('menu.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">

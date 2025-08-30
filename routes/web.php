@@ -49,7 +49,7 @@ Route::middleware('webauth')->group(function () {
     Route::get('/', function () {
         return view('menu.index');
       
-    });
+    })->name('menu.index');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
