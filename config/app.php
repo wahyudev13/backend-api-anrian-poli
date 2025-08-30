@@ -194,4 +194,7 @@ return [
         // ...
     ])->toArray(),
 
+    // Simple API key for protecting internal API endpoints
+    'api_key' => env('API_KEY'),
+
 ];

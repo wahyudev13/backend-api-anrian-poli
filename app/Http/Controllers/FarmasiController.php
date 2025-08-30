@@ -58,8 +58,10 @@ class FarmasiController extends Controller
 
     public function getAntrianA() {
         $todayDate = Carbon::now()->format('Y-m-d');
-        $get = Farmasi::whereNotIn('status',[4])
-        ->where('ketegori','A')->where('post_date',$todayDate)->get();
+        $get = Farmasi::select('id','no_urut','status','ketegori')
+        ->where('status', '!=', 4)
+        ->where('ketegori','A')
+        ->where('post_date',$todayDate)->get();
         return response()->json([
             'message'   => 'success',
             'data'      => $get
@@ -68,8 +70,10 @@ class FarmasiController extends Controller
 
     public function getAntrianB() {
         $todayDate = Carbon::now()->format('Y-m-d');
-        $get = Farmasi::whereNotIn('status',[4])
-        ->where('ketegori','B')->where('post_date',$todayDate)->get();
+        $get = Farmasi::select('id','no_urut','status','ketegori')
+        ->where('status', '!=', 4)
+        ->where('ketegori','B')
+        ->where('post_date',$todayDate)->get();
         return response()->json([
             'message'   => 'success',
             'data'      => $get

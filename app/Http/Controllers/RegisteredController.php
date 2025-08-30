@@ -23,26 +23,6 @@ class RegisteredController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $today = Carbon::today();
-
-        $get = Registered::join('pasien','reg_periksa.no_rkm_medis','=','pasien.no_rkm_medis')
-        ->join('poliklinik','reg_periksa.kd_poli','=','poliklinik.kd_poli')
-        ->join('dokter','reg_periksa.kd_dokter','=','dokter.kd_dokter')
-        ->join('penjab','reg_periksa.kd_pj','=','penjab.kd_pj')
-        ->select('reg_periksa.tgl_registrasi','reg_periksa.no_reg','reg_periksa.no_rawat','reg_periksa.no_rkm_medis','reg_periksa.kd_dokter','reg_periksa.kd_poli','reg_periksa.stts','pasien.nm_pasien','poliklinik.nm_poli','dokter.nm_dokter','penjab.png_jawab')
-        ->where('reg_periksa.tgl_registrasi',$today)
-        ->orderby('reg_periksa.no_rawat','desc')
-        ->get();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Data Pasien',
-            'data' => $get
-        ],200);
-       
-    }
     public function cari(Request $request)
     {
         $today = Carbon::today();
@@ -64,12 +44,6 @@ class RegisteredController extends Controller
         ],200);
     }
     
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     //Function Panggilan A
     public function store(Request $request)
     {
@@ -181,7 +155,15 @@ class RegisteredController extends Controller
     
     public function Poliklinik()
     {
-        $kode_poli = explode(',', env('POLI_DIGUNAKAN'));
+        $setting = DB::connection('mysql2')
+            ->table('antrian_setting')
+            ->where('module', 'general')
+            ->where('field', 'poli_digunakan')
+            ->value('value');
+        
+        // Default fallback if no setting found
+        $kode_poli = $setting ? explode(',', $setting) : ['U0005', 'INT'];
+        
         $getPoli = Poli::whereIn('kd_poli', $kode_poli)->distinct()->get();
 
         return response()->json([

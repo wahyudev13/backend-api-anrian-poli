@@ -10,6 +10,7 @@ class Setting extends Model
     use HasFactory;
     protected $connection = 'mysql2';
     protected $table = "antrian_setting";
+    public $timestamps = false;
     protected $fillable = [
         'id',
         'module',
